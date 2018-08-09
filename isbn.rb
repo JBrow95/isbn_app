@@ -1,3 +1,3 @@
-def valid()
+def valid(isbn)
 	
 end

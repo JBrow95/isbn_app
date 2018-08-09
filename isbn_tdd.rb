@@ -7,7 +7,8 @@ class TestIsbn < Minitest::Test
 		assert_equal(1, 1)
 	end
 
-	def test_if_class_is_arr
-		assert_equal(Array, valid().class)
+	def test_if_isbn10_is_valid_if_10_digit
+		assert_equal(true, valid("0471958697").class)
 	end
+
 end
