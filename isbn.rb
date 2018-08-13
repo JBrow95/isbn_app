@@ -1,29 +1,23 @@
 def isbn_check(isbn)
 	if isbn == nil
-		isbn = false
-	else
-		isbn_arr = isbn.split("")
-		isbn_arr.delete_if {|c| c==' ' || c=='-'}
+		isbn = "invalid"
 	end
 
+	isbn_arr = isbn.split("")
+	isbn_arr.delete_if {|c| c ==" " || c =="-"}
 	case isbn_arr.length
 
 	when 10
-		return true
-	when 13
-		return true
-	when 9
 		isbn_10(isbn_arr)
-	when 12
+	when 13
 		isbn_13(isbn_arr)
 	else
-		return false
+		isbn_arr = "Invalid"
 	end
-	isbn_arr
 end
 
 def isbn_10(isbn_arr)
-	the_arr = isbn_arr.split("")
+	the_arr = isbn_arr
 
 	isbn_checksum = 0
 
@@ -31,7 +25,7 @@ def isbn_10(isbn_arr)
 	if isbn_checkdigit.downcase == "x"
 		isbn_checkdigit = 10
 	else
-		isbn_checkdigit = isbn_checkdigit.to_s
+		isbn_checkdigit = isbn_checkdigit.to_i
 	end
 
 	the_arr.each_with_index do |d, idx|
@@ -42,11 +36,39 @@ def isbn_10(isbn_arr)
 	end
 
 	if isbn_checksum % 11 == isbn_checkdigit
-		return true
+		isbn_arr = "Valid"
+	else
+		isbn_arr = "Invalid"
 	end
 end
 
 def isbn_13(isbn_arr)
-	the_arr = isbn_arr.split("")
+	the_arr = isbn_arr
 
+	isbn_checksum = 0
+
+	isbn_checkdigit = the_arr.pop
+	if isbn_checkdigit.downcase == "x"
+		isbn_checkdigit = 10
+	else
+		isbn_checkdigit = isbn_checkdigit.to_i
+	end
+
+	the_arr.each_with_index do |d, idx|
+		unless d.to_i.to_s == d
+			return false	
+		end
+		if (idx+1).even?
+			isbn_checksum += d.to_i * 3
+		else
+			isbn_checksum += d.to_i * 1
+		end
+	end
+
+    sum = (10 - (isbn_checksum % 10)) % 10
+	if sum == isbn_checkdigit
+		isbn_arr = "Valid"
+	else
+		isbn_arr = "Invalid"
+	end
 end
