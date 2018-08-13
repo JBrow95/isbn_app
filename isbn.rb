@@ -8,10 +8,14 @@ def isbn_check(isbn)
 
 	case isbn_arr.length
 
-	when 10 || 13
+	when 10
+		return true
+	when 13
 		return true
 	when 9
 		isbn_10(isbn_arr)
+	when 12
+		isbn_13(isbn_arr)
 	else
 		return false
 	end
@@ -32,7 +36,7 @@ def isbn_10(isbn_arr)
 
 	the_arr.each_with_index do |d, idx|
 		unless d.to_i.to_s == d
-			return false
+			return false	
 		end
 		isbn_checksum += d.to_i * (idx+1)
 	end
@@ -40,4 +44,9 @@ def isbn_10(isbn_arr)
 	if isbn_checksum % 11 == isbn_checkdigit
 		return true
 	end
+end
+
+def isbn_13(isbn_arr)
+	the_arr = isbn_arr.split("")
+
 end
