@@ -1,14 +1,43 @@
-def valid_isbn_10(isbn)
-	isbn_arr = isbn.split("")
-	isbn_arr.delete_if {|n| n==' ' || n=='-'}
+def isbn_check(isbn)
+	if isbn == nil
+		isbn = false
+	else
+		isbn_arr = isbn.split("")
+		isbn_arr.delete_if {|c| c==' ' || c=='-'}
+	end
+
+	case isbn_arr.length
+
+	when 10 || 13
+		return true
+	when 9
+		isbn_10(isbn_arr)
+	else
+		return false
+	end
+	isbn_arr
+end
+
+def isbn_10(isbn_arr)
+	the_arr = isbn_arr.split("")
 
 	isbn_checksum = 0
 
-	if isbn_arr.length == 10
-		true
+	isbn_checkdigit = the_arr.pop
+	if isbn_checkdigit.downcase == "x"
+		isbn_checkdigit = 10
 	else
-		false
+		isbn_checkdigit = isbn_checkdigit.to_s
 	end
 
-	# isbn_checkdigit = isbn_arr.pop
+	the_arr.each_with_index do |d, idx|
+		unless d.to_i.to_s == d
+			return false
+		end
+		isbn_checksum += d.to_i * (idx+1)
+	end
+
+	if isbn_checksum % 11 == isbn_checkdigit
+		return true
+	end
 end
