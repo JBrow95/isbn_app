@@ -14,10 +14,16 @@
 
 		<div class="main">
 			<form method="post" action="/validate">
-				<input type="text" name="isbn" placeholder="Enter ISBN">
-				<button type="submit">Check</button>
+				<textarea rows="15" name="isbn_nums"></textarea><br>
+				<input type="submit" value="Check"><br>
 			</form>
-			<h2><%= final%></h2>
+
+			<% if nums != []  || nums != nil%>
+			<% nums.each do |num| %>
+				<h2><%= num%></h2>
+			<% end %>
+			<% end %>
+			<h2><%= final_arr%></h2>
 		</div>
 
 		<div class="side2">
