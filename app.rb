@@ -4,7 +4,7 @@ enable :sessions
 
 get '/' do
 	nums = []
-	final_arr = final_arr
+	final_arr = []
 	erb :dashboard, locals:{final_arr: final_arr, nums: nums}
 end
 
@@ -18,11 +18,8 @@ post '/validate' do
 			final_arr << isbn_check(i)
 		end
 	end
-
-	str = ''
-	final_arr.each do |n|
-		str += '<br>'
-	end
+	final_arr
+	
 
 	p " |||| #{final_arr}"
 
