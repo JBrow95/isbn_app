@@ -3,10 +3,6 @@ def isbn_check(isbn)
 		isbn = "invalid"
 	end
 
-	if isbn == "Valid"
-		"valid"
-	end
-	
 	isbn_arr = isbn.split("")
 	isbn_arr.delete_if {|c| c ==" " || c =="-"}
 	case isbn_arr.length

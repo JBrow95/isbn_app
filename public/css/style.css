@@ -27,7 +27,6 @@ header {
 	margin-top: 25px;
 	text-align: center;
 	flex: 2;
-	display: flex;
 }
 
 .side2 {
@@ -35,10 +34,20 @@ header {
 	text-align: center;
 }
 
+
+.isbn_main {
+	max-width: 1150px;
+	margin: 40px auto 0 auto;
+	line-height: 1.65;
+	display: flex;
+}
+
 .left {
+	color: #fff;
 	flex: 1;
 }
 
 .right {
+	color: #fff;
 	flex: 1;
 }
